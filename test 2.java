@@ -16,6 +16,7 @@ public class Tester {
         int size_exp = expressions.length;
         int size_maxR = maxReplacements.length;
         Stack<Integer> bal_stack = new Stack<Integer>();
+	int[] results = new int[size_exp];
         
         for ( int i = 0; i < size_exp; i++ ){
             
@@ -38,12 +39,23 @@ public class Tester {
                 }
                 
             }
-            
-        Iterator<Integer> iter = bal_stack.iterator();
+            if(!bal_stack.empty()){
+		Iterator<Integer> iter = bal_stack.iterator();
 
-        while (iter.hasNext()){
-           iter.next()
-        }
+		while (iter.hasNext()){
+		   if(iter.next() == 1) left_count++;
+		   if(iter.next() == 2) right_count++;
+		}
+		    
+		if(left_count != 0) {
+			results[i] = 0;
+		}else if(left_count == 0 && right_count <= maxReplacements[i]){
+			results[i] = 1;
+		}
+		    
+	    }else{
+	    	results[i] = 1;
+	    }
             
         }
 
